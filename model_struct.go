@@ -393,6 +393,9 @@ func (scope *Scope) generateSqlTag(field *StructField) string {
 	if value, ok := sqlSettings["DEFAULT"]; ok {
 		additionalType = additionalType + " DEFAULT " + value
 	}
+	if value, ok := sqlSettings["COLLATE"]; ok {
+		additionalType = additionalType + " COLLATE " + strings.ToUpper(value)
+	}
 
 	if field.IsScanner {
 		var getScannerValue func(reflect.Value)
